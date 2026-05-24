@@ -1,99 +1,95 @@
 ## 🚀 IdeaCritic
 
-
 Many ideas fail not because they are bad, but because they are never validated properly at an early stage. 
 
 IdeaCritic is an AI-powered multi-agent idea evaluation system designed to help students, founders, and innovators critically analyze ideas before execution. It simulates expert-level discussions using AI agents and grounds feedback with real-world market data using structured debates, real-time market intelligence, and investor-style scoring.
 
 ## 📌 Project Overview
 
-Traditional idea validation is subjective and often biased.
-IdeaCritic simulates a panel of multiple specialized AI agents that collaboratively analyze an idea from different perspectives.
+Traditional idea validation is subjective and often biased. IdeaCritic simulates a panel of multiple specialized AI agents that collaboratively analyze an idea from different perspectives.
 
 The system:
-
-Challenges assumptions
-
-Grounds feedback with real-world data (RAG) so to avoid limited or outdated market research
-
-Produces actionable, investor-ready insights & evaluates its real-world viability
+- **Challenges assumptions** through multi-perspective debate.
+- **Grounds feedback with real-world data (RAG)** to avoid hallucinations and outdated market research.
+- **Produces actionable, investor-ready insights** and evaluates real-world viability.
 
 ## 🔄 System Workflow
 
-1. User enters an idea
-2. The system generates clarifying questions
-3. User answers the clarifying questions
-4. Multi-round debate between Optimist and Critic agents
-5. Business Analyst synthesizes a balanced final summary
-6. Market Analyst fetches real-world market data using RAG
-7. Investor Bot evaluates the idea and generates a score with recommendations
-8. The complete analysis is stored and can be revisited later
+1. **Describe Idea:** User enters an idea, title, and domain.
+2. **Clarify:** The system generates clarifying questions; user answers them to narrow the scope.
+3. **Multi-Agent Debate:** A structured, multi-round debate occurs between the Optimist, Critic, and Devil's Advocate agents.
+4. **Business Analysis:** The Business Analyst synthesizes a balanced final summary.
+5. **Market Intelligence:** The Market Analyst fetches real-world market data using RAG (Tavily).
+6. **Investor Evaluation:** The Investor Bot evaluates the idea, generates a score (0-100), and gives a verdict.
+7. **Pivot Suggestions:** If the idea scores poorly, the Pivot Suggester offers alternative business models.
+8. **Export & Compare:** The complete analysis is stored in MongoDB. Users can export reports to Markdown/PDF or compare multiple ideas side-by-side.
 
 ## ✨ Key Features
 
-- **Multi-Agent Debate System**
+- **Advanced Multi-Agent Debate System**
   - 🟢 **Optimist Agent** – highlights strengths and opportunities
   - 🔴 **Critic Agent** – identifies risks and weaknesses
+  - 🟠 **Devil's Advocate** – challenges fundamental assumptions
   - ⚖️ **Business Analyst** – synthesizes a balanced summary
+  - 🔄 **Pivot Suggester** – offers strategic pivots for low-scoring ideas
 
 - **Market Analyst (RAG-powered)**
-  - Fetches real-time competition and market insights 
+  - Fetches real-time competitor and market insights using Tavily API.
 
-- **Investor Bot**
-  - Scores ideas across key evaluation dimensions
-  - Generates a final investment verdict (0–100 score)
+- **Investor Bot & Score Dashboard**
+  - Scores ideas across 5 key dimensions (Market, Innovation, Scalability, Team, Risk).
+  - Generates a final investment verdict.
+  - Interactive UI with Plotly radar and bar charts.
 
-- **Clarifying Questions**
-  - Improves idea clarity and quality before evaluation
+- **Analysis History & Comparison**
+  - View all past analyses backed by MongoDB.
+  - Compare two different ideas side-by-side to see which is a better investment.
 
-- **Analysis History**
-  - Stores past idea evaluations using MongoDB
+- **Exporting**
+  - Download full reports as `.md` or `.pdf` files.
 
- ## 🏗️ Tech Stack
+- **Resilient AI Infrastructure**
+  - Primary LLM: **Google Gemini (3.1 Pro / 2.5 Flash)**
+  - Fallback LLM: **Groq (LLaMA 3.1 8B)** for zero-downtime during rate limits.
+
+## 🏗️ Tech Stack
 
 ### AI & LLMs
-- Google Gemini (Gemini 2.5 Flash / Gemma-based reasoning)
-- LangChain (agent orchestration)
+- **Primary Model:** Google Gemini API
+- **Fallback Model:** Groq API (LLaMA 3)
+- **Framework:** Custom Streamlit streaming architecture
 
 ### Backend & UI
-- Streamlit (full-stack application)
-- Python
+- **Frontend:** Streamlit (Multi-page app)
+- **Data Viz:** Plotly (Radar & Bar charts)
+- **Language:** Python 3.9+
 
 ### RAG & Market Intelligence
-- Tavily Search API / Serper.dev API for real-time market data retrieval
+- **Search:** Tavily API for real-time market data retrieval
 
 ### Database
-- MongoDB (analysis storage and caching)
-
-### Utilities
-- pandas
-- numpy
-
-## 🎥 Demo Video (Running Module)
-
-- 📽️ **Project Walkthrough Video**
-- 👉 [Click here to watch the demo](https://drive.google.com/file/d/1NuGf4yaD0dDeyH-p_7VZ235TchN9VV2-/view?usp=sharing)
+- **Storage:** MongoDB (analysis storage and caching)
 
 ## 🛠️ How to Run the Project
 
-Prerequisites
-
+**Prerequisites:**
 - Python 3.9+
-- MongoDB
-API Keys:
-- Google Gemini API
-- Tavily API
+- MongoDB instance (local or Atlas)
+
+**API Keys Required in `.env`:**
+- `GEMINI_API_KEY`
+- `GROQ_API_KEY` (Optional, for fallback)
+- `TAVILY_API_KEY`
+- `MONGO_URI`
 
 ```bash
 # Clone the repository
-git clone https://github.com/student3964/IdeaCritic.git
-cd IdeaCritic
+git clone https://github.com/student3964/ideacritic-pbl-sem6.git
+cd ideacritic-pbl-sem6
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Run the application
-streamlit run v_app.py
-
-
-
+streamlit run app.py
+```
