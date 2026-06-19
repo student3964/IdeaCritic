@@ -7,3 +7,6 @@ numpy
 google-genai
 plotly
 langchain
+markdown2
+fpdf2
+groq
